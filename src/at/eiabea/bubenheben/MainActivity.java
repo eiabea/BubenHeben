@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -23,7 +24,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private List<Integer> cardList = new ArrayList<Integer>();
 	private List<Integer> bubenList = new ArrayList<Integer>();
 	private SharedPreferences settings = null;
-	//private Boolean cameFromOnResume = false;
+	private Builder dlgTutorial = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +38,6 @@ public class MainActivity extends Activity implements OnClickListener {
 		initCardList();
 		
 		shuffleCards();
-		
-		//play();
 		
 		settings = this.getPreferences(Activity.MODE_PRIVATE);
 
@@ -61,11 +60,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onResume() {
 	     super.onResume();
-
 	        if (settings.getBoolean("firstrun", true)) {
-	            // Do first run stuff here then set 'firstrun' as false
-	            // using the following line to edit/commit prefs
-	        	System.out.println("firstrun");
+	        	dlgTutorial.create().show();
 	        	settings.edit().putBoolean("firstrun", false).commit();
 	        }
 	    }
@@ -97,13 +93,15 @@ public class MainActivity extends Activity implements OnClickListener {
 		bubenList.add(R.drawable.kb);
 		bubenList.add(R.drawable.pb);
 	}
-	
-	
 
 	private void initUI() {
 		cardView = (ImageView) findViewById(R.id.cardView);
-		cardView.setImageDrawable(getResources().getDrawable(R.drawable.ic_launcher));
-
+		cardView.setImageDrawable(getResources().getDrawable(R.drawable.back));
+    	dlgTutorial = new AlertDialog.Builder(this)
+        .setTitle(getResources().getString(R.string.menu_description))
+        .setIcon(getResources().getDrawable(R.drawable.ic_launcher))
+        .setMessage(getResources().getString(R.string.string_description))
+        .setPositiveButton("Verstanden!", null);
 	}
 
 	private void setListener() {
@@ -115,6 +113,18 @@ public class MainActivity extends Activity implements OnClickListener {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	    case R.id.menu_description:
+	        dlgTutorial.show();
+	        return true;
+	    default:
+	        return super.onOptionsItemSelected(item);
+	    }
 	}
 
 	@Override
@@ -128,6 +138,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				
 				Builder builder = new AlertDialog.Builder(this);
 				builder.setCancelable(false);
+				builder.setIcon(getResources().getDrawable(R.drawable.ic_launcher));
 				builder.setPositiveButton("Fertig", new DialogInterface.OnClickListener() {
 					
 					@Override
