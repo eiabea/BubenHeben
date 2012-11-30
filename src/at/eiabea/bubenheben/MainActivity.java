@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -21,6 +22,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	private int bubenCount = 0;
 	private List<Integer> cardList = new ArrayList<Integer>();
 	private List<Integer> bubenList = new ArrayList<Integer>();
+	private SharedPreferences settings = null;
+	//private Boolean cameFromOnResume = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +35,40 @@ public class MainActivity extends Activity implements OnClickListener {
 		setListener();
 
 		initCardList();
+		
 		shuffleCards();
-		play();
+		
+		//play();
+		
+		settings = this.getPreferences(Activity.MODE_PRIVATE);
 
 	}
+
+	@Override
+	public void onBackPressed() {
+	    new AlertDialog.Builder(this)
+	        .setTitle("App beenden?")
+	        .setMessage("Willst du die App wirklich beenden?")
+	        .setNegativeButton("Nein", null)
+	        .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+
+	            public void onClick(DialogInterface arg0, int arg1) {
+	                MainActivity.super.onBackPressed();
+	            }
+	        }).create().show();
+	}
+
+	@Override
+	protected void onResume() {
+	     super.onResume();
+
+	        if (settings.getBoolean("firstrun", true)) {
+	            // Do first run stuff here then set 'firstrun' as false
+	            // using the following line to edit/commit prefs
+	        	System.out.println("firstrun");
+	        	settings.edit().putBoolean("firstrun", false).commit();
+	        }
+	    }
 
 	private void initCardList() {
 		cardList.add(R.drawable.c10);
@@ -68,20 +101,19 @@ public class MainActivity extends Activity implements OnClickListener {
 	
 
 	private void initUI() {
-		// TODO Auto-generated method stub
 		cardView = (ImageView) findViewById(R.id.cardView);
+		cardView.setImageDrawable(getResources().getDrawable(R.drawable.ic_launcher));
 
 	}
 
 	private void setListener() {
-		// TODO Auto-generated method stub
 		cardView.setOnClickListener(this);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.activity_main, menu);
+		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
 
