@@ -27,6 +27,14 @@ public class MainActivity extends Activity implements OnClickListener {
 	private List<Integer> bubenList = new ArrayList<Integer>();
 	private SharedPreferences settings = null;
 	private Builder dlgTutorial = null;
+	private Builder bldfirstboy;
+	private Builder bldsecondboy;
+	private Builder bldthirdboy;
+	private Builder bldfourthboy;
+	private AlertDialog dlgfirstboy;
+	private AlertDialog dlgsecondboy;
+	private AlertDialog dlgthirdboy;
+	private AlertDialog dlgfourthboy;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +112,66 @@ public class MainActivity extends Activity implements OnClickListener {
         .setIcon(getResources().getDrawable(R.drawable.ic_launcher))
         .setMessage(getStringFromRes(R.string.string_description))
         .setPositiveButton(getStringFromRes(R.string.string_got_it), null);
+    	
+    	bldfirstboy = new AlertDialog.Builder(this)
+		.setCancelable(false)
+		.setIcon(getResources().getDrawable(R.drawable.ic_launcher))
+		.setTitle(getStringFromRes(R.string.string_first_boy))
+    	.setMessage(getStringFromRes(R.string.string_fill_alkohol))
+		.setPositiveButton(getStringFromRes(R.string.string_done), new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dlgfirstboy.dismiss();
+			}
+		});
+    	dlgfirstboy = bldfirstboy.create();
+    	
+    	bldsecondboy = new AlertDialog.Builder(this)
+    	.setCancelable(false)
+    	.setIcon(getResources().getDrawable(R.drawable.ic_launcher))
+		.setTitle(getStringFromRes(R.string.string_second_boy))
+		.setMessage(getStringFromRes(R.string.string_fill_anti))
+    	.setPositiveButton(getStringFromRes(R.string.string_done), new DialogInterface.OnClickListener() {
+    		
+    		@Override
+    		public void onClick(DialogInterface dialog, int which) {
+    			dlgsecondboy.dismiss();
+    		}
+    	});
+    	dlgsecondboy = bldsecondboy.create();
+    	
+    	bldthirdboy = new AlertDialog.Builder(this)
+    	.setCancelable(false)
+    	.setIcon(getResources().getDrawable(R.drawable.ic_launcher))
+		.setTitle(getStringFromRes(R.string.string_third_boy))
+		.setMessage(getStringFromRes(R.string.string_try))
+    	.setPositiveButton(getStringFromRes(R.string.string_done), new DialogInterface.OnClickListener() {
+    		
+    		@Override
+    		public void onClick(DialogInterface dialog, int which) {
+    			dlgthirdboy.dismiss();
+    		}
+    	});
+    	dlgthirdboy = bldthirdboy.create();
+
+    	bldfourthboy = new AlertDialog.Builder(this)
+    	.setCancelable(false)
+    	.setIcon(getResources().getDrawable(R.drawable.ic_launcher))
+		.setTitle(getStringFromRes(R.string.string_fourth_boy))
+		.setMessage(getStringFromRes(R.string.string_drain))
+		.setPositiveButton("Neu mischen?", new DialogInterface.OnClickListener() {
+								
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					shuffleCards();
+					currentCard = 0;
+					bubenCount = 0;
+					play();
+				}
+			});
+    	dlgfourthboy = bldfourthboy.create();
+    	
 	}
 
 	private void setListener() {
@@ -141,9 +209,6 @@ public class MainActivity extends Activity implements OnClickListener {
 			anim.setInterpolator(new LinearInterpolator());
 			anim.setDuration(700);
 
-			final Builder builder = new AlertDialog.Builder(this);
-			builder.setCancelable(false);
-			builder.setIcon(getResources().getDrawable(R.drawable.ic_launcher));
 			// Start animating the image
 			cardView.startAnimation(anim);
 			cardView.postDelayed(new Runnable() {
@@ -152,56 +217,27 @@ public class MainActivity extends Activity implements OnClickListener {
 				public void run() {
 					cardView.setImageDrawable(getResources().getDrawable(cardList.get(currentCard)));
 					if(bubenList.indexOf(cardList.get(currentCard)) != -1){
-						
-						builder.setPositiveButton(getStringFromRes(R.string.string_done), new DialogInterface.OnClickListener() {
-							
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								dialog.dismiss();
-							}
-						});
-						
 						switch (bubenCount) {
 						case 0:
-							builder.setTitle(getStringFromRes(R.string.string_first_boy));
-							builder.setMessage(getStringFromRes(R.string.string_fill_alkohol));
-							//System.out.println("1. Bube");
+							dlgfirstboy.show();
 							
 							break;
 						case 1:
-							builder.setTitle(getStringFromRes(R.string.string_second_boy));
-							builder.setMessage(getStringFromRes(R.string.string_fill_anti));
-							//System.out.println("2. Bube");
+							dlgsecondboy.show();
 							
 							break;
 						case 2:
-							builder.setTitle(getStringFromRes(R.string.string_third_boy));
-							builder.setMessage(getStringFromRes(R.string.string_try));
-							//System.out.println("3. Bube");
+							dlgthirdboy.show();
 							
 							break;
 						case 3:
-							//System.out.println("4. Bube");
-							builder.setTitle(getStringFromRes(R.string.string_fourth_boy));
-							builder.setMessage(getStringFromRes(R.string.string_drain));
-							builder.setPositiveButton("Neu mischen?", new DialogInterface.OnClickListener() {
-								
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									shuffleCards();
-									currentCard = 0;
-									bubenCount = 0;
-									play();
-								}
-							});
+							dlgfourthboy.show();
 							
 							break;
 							
 						default:
 							break;
 						}
-						AlertDialog dialog = builder.create();
-						dialog.show();
 						bubenCount++;
 					}
 				}
