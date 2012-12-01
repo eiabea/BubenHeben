@@ -17,10 +17,12 @@ import android.view.View.OnClickListener;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 public class MainActivity extends Activity implements OnClickListener {
 
 	private ImageView cardView;
+	private RelativeLayout splash;
 	private int currentCard = 0;
 	private int bubenCount = 0;
 	private List<Integer> cardList = new ArrayList<Integer>();
@@ -51,6 +53,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		
 		settings = this.getPreferences(Activity.MODE_PRIVATE);
 
+		splash.setVisibility(RelativeLayout.GONE);
+		cardView.setVisibility(ImageView.VISIBLE);
+		
 	}
 
 	@Override
@@ -106,6 +111,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	private void initUI() {
 		cardView = (ImageView) findViewById(R.id.cardView);
+		splash = (RelativeLayout) findViewById(R.id.rl_splash);
 		cardView.setImageDrawable(getResources().getDrawable(R.drawable.back));
     	dlgTutorial = new AlertDialog.Builder(this)
         .setTitle(getStringFromRes(R.string.menu_description))
@@ -160,7 +166,7 @@ public class MainActivity extends Activity implements OnClickListener {
     	.setIcon(getResources().getDrawable(R.drawable.ic_launcher))
 		.setTitle(getStringFromRes(R.string.string_fourth_boy))
 		.setMessage(getStringFromRes(R.string.string_drain))
-		.setPositiveButton("Neu mischen?", new DialogInterface.OnClickListener() {
+		.setPositiveButton(getStringFromRes(R.string.string_reshuffle), new DialogInterface.OnClickListener() {
 								
 				@Override
 				public void onClick(DialogInterface dialog, int which) {

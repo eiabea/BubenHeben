@@ -4,7 +4,42 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
+    <RelativeLayout 
+        android:id="@+id/rl_splash"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    tools:context=".MainActivity" >
+
+	    <ProgressBar
+	        android:id="@+id/progressBar1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:layout_centerVertical="true" />
+	
+	    <TextView
+	        android:id="@+id/txtLoadingCards"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/progressBar1"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="24dp"
+	        android:text="@string/string_loading_cards"
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+	    <ImageView
+	        android:id="@+id/imageView1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_above="@+id/progressBar1"
+	        android:layout_alignLeft="@+id/progressBar1"
+	        android:layout_marginBottom="80dp"
+	        android:src="@drawable/ic_launcher" />
+	
+	</RelativeLayout>
+    
     <ImageView
+        android:visibility="gone"
         android:contentDescription="@string/content_description_cardView"
         android:id="@+id/cardView"
         android:layout_width="wrap_content"

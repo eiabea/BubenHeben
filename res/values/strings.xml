@@ -16,6 +16,8 @@
     <string name="string_fill_anti">Anti einschenken</string>
     <string name="string_try">Kosten</string>
     <string name="string_drain">Austrinken</string>
+    <string name="string_reshuffle">Neu mischen?</string>
+    <string name="string_loading_cards">Lade Karten</string>
     
     <string name="menu_description">Erklärung</string>
     <string name="string_description">..::Es wird benötigt::..\n
