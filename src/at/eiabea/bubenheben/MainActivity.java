@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
 public class MainActivity extends Activity implements OnClickListener {
@@ -134,63 +136,76 @@ public class MainActivity extends Activity implements OnClickListener {
 	
 	public void play(){
 		if(currentCard<20){
-			if(bubenList.indexOf(cardList.get(currentCard)) != -1){
+			
+			RotateAnimation anim = new RotateAnimation(0f, 180f, 0f, 0f);
+			anim.setInterpolator(new LinearInterpolator());
+			anim.setDuration(700);
+
+			final Builder builder = new AlertDialog.Builder(this);
+			builder.setCancelable(false);
+			builder.setIcon(getResources().getDrawable(R.drawable.ic_launcher));
+			// Start animating the image
+			cardView.startAnimation(anim);
+			cardView.postDelayed(new Runnable() {
 				
-				Builder builder = new AlertDialog.Builder(this);
-				builder.setCancelable(false);
-				builder.setIcon(getResources().getDrawable(R.drawable.ic_launcher));
-				builder.setPositiveButton(getStringFromRes(R.string.string_done), new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-				});
-				
-				switch (bubenCount) {
-				case 0:
-					builder.setTitle(getStringFromRes(R.string.string_first_boy));
-					builder.setMessage(getStringFromRes(R.string.string_fill_alkohol));
-					//System.out.println("1. Bube");
-					
-					break;
-				case 1:
-					builder.setTitle(getStringFromRes(R.string.string_second_boy));
-					builder.setMessage(getStringFromRes(R.string.string_fill_anti));
-					//System.out.println("2. Bube");
-					
-					break;
-				case 2:
-					builder.setTitle(getStringFromRes(R.string.string_third_boy));
-					builder.setMessage(getStringFromRes(R.string.string_try));
-					//System.out.println("3. Bube");
-					
-					break;
-				case 3:
-					//System.out.println("4. Bube");
-					builder.setTitle(getStringFromRes(R.string.string_fourth_boy));
-					builder.setMessage(getStringFromRes(R.string.string_drain));
-					builder.setPositiveButton("Neu mischen?", new DialogInterface.OnClickListener() {
+				@Override
+				public void run() {
+					cardView.setImageDrawable(getResources().getDrawable(cardList.get(currentCard)));
+					if(bubenList.indexOf(cardList.get(currentCard)) != -1){
 						
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							shuffleCards();
-							currentCard = 0;
-							bubenCount = 0;
-							play();
+						builder.setPositiveButton(getStringFromRes(R.string.string_done), new DialogInterface.OnClickListener() {
+							
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								dialog.dismiss();
+							}
+						});
+						
+						switch (bubenCount) {
+						case 0:
+							builder.setTitle(getStringFromRes(R.string.string_first_boy));
+							builder.setMessage(getStringFromRes(R.string.string_fill_alkohol));
+							//System.out.println("1. Bube");
+							
+							break;
+						case 1:
+							builder.setTitle(getStringFromRes(R.string.string_second_boy));
+							builder.setMessage(getStringFromRes(R.string.string_fill_anti));
+							//System.out.println("2. Bube");
+							
+							break;
+						case 2:
+							builder.setTitle(getStringFromRes(R.string.string_third_boy));
+							builder.setMessage(getStringFromRes(R.string.string_try));
+							//System.out.println("3. Bube");
+							
+							break;
+						case 3:
+							//System.out.println("4. Bube");
+							builder.setTitle(getStringFromRes(R.string.string_fourth_boy));
+							builder.setMessage(getStringFromRes(R.string.string_drain));
+							builder.setPositiveButton("Neu mischen?", new DialogInterface.OnClickListener() {
+								
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									shuffleCards();
+									currentCard = 0;
+									bubenCount = 0;
+									play();
+								}
+							});
+							
+							break;
+							
+						default:
+							break;
 						}
-					});
-					
-					break;
-					
-				default:
-					break;
+						AlertDialog dialog = builder.create();
+						dialog.show();
+						bubenCount++;
+					}
 				}
-				AlertDialog dialog = builder.create();
-				dialog.show();
-				bubenCount++;
-			}
-			cardView.setImageDrawable(getResources().getDrawable(cardList.get(currentCard)));
+			}, 400);
 			currentCard++;
 		}else{
 			System.out.println("durch");
