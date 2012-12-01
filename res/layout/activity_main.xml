@@ -5,10 +5,11 @@
     tools:context=".MainActivity" >
 
     <ImageView
+        android:contentDescription="@string/content_description_cardView"
         android:id="@+id/cardView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" />
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true"
+        android:scaleType="fitCenter" />
 
 </RelativeLayout>

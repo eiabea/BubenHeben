@@ -46,10 +46,10 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public void onBackPressed() {
 	    new AlertDialog.Builder(this)
-	        .setTitle("App beenden?")
-	        .setMessage("Willst du die App wirklich beenden?")
-	        .setNegativeButton("Nein", null)
-	        .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+	        .setTitle(getStringFromRes(R.string.string_close_app))
+	        .setMessage(getStringFromRes(R.string.string_do_you_really_want_to_quit))
+	        .setNegativeButton(getStringFromRes(R.string.string_no), null)
+	        .setPositiveButton(getStringFromRes(R.string.string_yes), new DialogInterface.OnClickListener() {
 
 	            public void onClick(DialogInterface arg0, int arg1) {
 	                MainActivity.super.onBackPressed();
@@ -98,10 +98,10 @@ public class MainActivity extends Activity implements OnClickListener {
 		cardView = (ImageView) findViewById(R.id.cardView);
 		cardView.setImageDrawable(getResources().getDrawable(R.drawable.back));
     	dlgTutorial = new AlertDialog.Builder(this)
-        .setTitle(getResources().getString(R.string.menu_description))
+        .setTitle(getStringFromRes(R.string.menu_description))
         .setIcon(getResources().getDrawable(R.drawable.ic_launcher))
-        .setMessage(getResources().getString(R.string.string_description))
-        .setPositiveButton("Verstanden!", null);
+        .setMessage(getStringFromRes(R.string.string_description))
+        .setPositiveButton(getStringFromRes(R.string.string_got_it), null);
 	}
 
 	private void setListener() {
@@ -139,7 +139,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				Builder builder = new AlertDialog.Builder(this);
 				builder.setCancelable(false);
 				builder.setIcon(getResources().getDrawable(R.drawable.ic_launcher));
-				builder.setPositiveButton("Fertig", new DialogInterface.OnClickListener() {
+				builder.setPositiveButton(getStringFromRes(R.string.string_done), new DialogInterface.OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -149,27 +149,27 @@ public class MainActivity extends Activity implements OnClickListener {
 				
 				switch (bubenCount) {
 				case 0:
-					builder.setTitle("1. Bube");
-					builder.setMessage("Alkohol einschenken");
-					System.out.println("1. Bube");
+					builder.setTitle(getStringFromRes(R.string.string_first_boy));
+					builder.setMessage(getStringFromRes(R.string.string_fill_alkohol));
+					//System.out.println("1. Bube");
 					
 					break;
 				case 1:
-					builder.setTitle("2. Bube");
-					builder.setMessage("Anti einschenken");
-					System.out.println("2. Bube");
+					builder.setTitle(getStringFromRes(R.string.string_second_boy));
+					builder.setMessage(getStringFromRes(R.string.string_fill_anti));
+					//System.out.println("2. Bube");
 					
 					break;
 				case 2:
-					builder.setTitle("3. Bube");
-					builder.setMessage("Kosten");
-					System.out.println("3. Bube");
+					builder.setTitle(getStringFromRes(R.string.string_third_boy));
+					builder.setMessage(getStringFromRes(R.string.string_try));
+					//System.out.println("3. Bube");
 					
 					break;
 				case 3:
-					System.out.println("4. Bube");
-					builder.setTitle("4. Bube");
-					builder.setMessage("Austrinken");
+					//System.out.println("4. Bube");
+					builder.setTitle(getStringFromRes(R.string.string_fourth_boy));
+					builder.setMessage(getStringFromRes(R.string.string_drain));
 					builder.setPositiveButton("Neu mischen?", new DialogInterface.OnClickListener() {
 						
 						@Override
@@ -200,6 +200,13 @@ public class MainActivity extends Activity implements OnClickListener {
 	
 	public void shuffleCards(){
 		Collections.shuffle( cardList );
+	}
+	
+	public String getStringFromRes(int id){
+		if(id != 0){
+			return getResources().getString(id);
+		}
+		return null;
 	}
 
 }
