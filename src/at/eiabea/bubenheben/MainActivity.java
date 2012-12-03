@@ -170,9 +170,9 @@ public class MainActivity extends Activity implements OnClickListener {
 								
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					shuffleCards();
-					currentCard = 0;
-					bubenCount = 0;
+					//shuffleCards();
+					//currentCard = 0;
+					//bubenCount = 0;
 					play();
 				}
 			});
@@ -205,10 +205,13 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
+		System.out.println(cardList.size());
 		play();
 	}
 	
 	public void play(){
+		System.out.println(currentCard);
+		
 		if(currentCard<20){
 			
 			RotateAnimation anim = new RotateAnimation(0f, 180f, 0f, 0f);
@@ -246,9 +249,9 @@ public class MainActivity extends Activity implements OnClickListener {
 						}
 						bubenCount++;
 					}
+					currentCard++;
 				}
 			}, 400);
-			currentCard++;
 		}else{
 			System.out.println("durch");
 		}
