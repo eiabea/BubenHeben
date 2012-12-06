@@ -37,6 +37,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private AlertDialog dlgsecondboy;
 	private AlertDialog dlgthirdboy;
 	private AlertDialog dlgfourthboy;
+	private RotateAnimation anim;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +114,11 @@ public class MainActivity extends Activity implements OnClickListener {
 		cardView = (ImageView) findViewById(R.id.cardView);
 		splash = (RelativeLayout) findViewById(R.id.rl_splash);
 		cardView.setImageDrawable(getResources().getDrawable(R.drawable.back));
+		
+		anim = new RotateAnimation(0f, 180f, 0f, 0f);
+		anim.setInterpolator(new LinearInterpolator());
+		anim.setDuration(700);
+		
     	dlgTutorial = new AlertDialog.Builder(this)
         .setTitle(getStringFromRes(R.string.menu_description))
         .setIcon(getResources().getDrawable(R.drawable.ic_launcher))
@@ -211,44 +217,50 @@ public class MainActivity extends Activity implements OnClickListener {
 	public void play(){
 		if(currentCard<20){
 			
-			RotateAnimation anim = new RotateAnimation(0f, 180f, 0f, 0f);
-			anim.setInterpolator(new LinearInterpolator());
-			anim.setDuration(700);
-
 			// Start animating the image
 			cardView.startAnimation(anim);
-			cardView.postDelayed(new Runnable() {
-				
-				@Override
-				public void run() {
-					cardView.setImageDrawable(getResources().getDrawable(cardList.get(currentCard)));
-					if(bubenList.indexOf(cardList.get(currentCard)) != -1){
-						switch (bubenCount) {
-						case 0:
-							dlgfirstboy.show();
+				cardView.postDelayed(new Runnable() {
+					
+					@Override
+					public void run() {
+						try {
+						cardView.setImageDrawable(getResources().getDrawable(cardList.get(currentCard)));
+							if(bubenList.indexOf(cardList.get(currentCard)) != -1){
+								switch (bubenCount) {
+								case 0:
+									dlgfirstboy.show();
+									
+									break;
+								case 1:
+									dlgsecondboy.show();
+									
+									break;
+								case 2:
+									dlgthirdboy.show();
+									
+									break;
+								case 3:
+									dlgfourthboy.show();
+									
+									break;
+									
+								default:
+									break;
+								}
+								bubenCount++;
+							}
+						} catch (IndexOutOfBoundsException e) {
+							shuffleCards();
+							currentCard = 0;
+							bubenCount = 0;
+							play();
 							
-							break;
-						case 1:
-							dlgsecondboy.show();
-							
-							break;
-						case 2:
-							dlgthirdboy.show();
-							
-							break;
-						case 3:
-							dlgfourthboy.show();
-							
-							break;
-							
-						default:
-							break;
 						}
-						bubenCount++;
 					}
-					currentCard++;
-				}
-			}, 400);
+				}, 400);
+				
+			currentCard++;
+			//setListener();
 		}else{
 			System.out.println("durch");
 		}
