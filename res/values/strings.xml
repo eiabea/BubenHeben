@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">BubenHeben</string>
-    <string name="string_close_app">App beenden?</string>
-    <string name="string_do_you_really_want_to_quit">Willst du die App wirklich beenden?</string>
-    <string name="string_yes">Ja</string>
-    <string name="string_no">Nein</string>
-    <string name="string_got_it">Verstanden!</string>
-    <string name="string_done">Fertig</string>
-    <string name="string_first_boy">1. Bube</string>
-    <string name="string_second_boy">2. Bube</string>
-    <string name="string_third_boy">3. Bube</string>
-    <string name="string_fourth_boy">4. Bube</string>
-    <string name="string_fill_alkohol">Alkohol einschenken</string>
-    <string name="string_fill_anti">Anti einschenken</string>
-    <string name="string_try">Kosten</string>
-    <string name="string_drain">Austrinken</string>
-    <string name="string_reshuffle">Neu mischen?</string>
-    <string name="string_loading_cards">Lade Karten</string>
+    <string name="app_name">Picking up Jacks</string>
+    <string name="string_close_app">Quit App?</string>
+    <string name="string_do_you_really_want_to_quit">Do you really want to quit the App?</string>
+    <string name="string_yes">Yes</string>
+    <string name="string_no">No</string>
+    <string name="string_got_it">Understood!</string>
+    <string name="string_done">Finished</string>
+    <string name="string_first_boy">1st Jack</string>
+    <string name="string_second_boy">2nd Jack</string>
+    <string name="string_third_boy">3rd Jack</string>
+    <string name="string_fourth_boy">4th Jack</string>
+    <string name="string_fill_alkohol">Pour alcohol</string>
+    <string name="string_fill_anti">Pour non-alcoholic drink</string>
+    <string name="string_try">Taste</string>
+    <string name="string_drain">Chug!</string>
+    <string name="string_reshuffle">Mix again?</string>
+    <string name="string_loading_cards">Loading cards</string>
     
-    <string name="menu_description">Erklärung</string>
-    <string name="string_description">..::Es wird benötigt::..\n
+    <string name="menu_description">How to play</string>
+    <string name="string_description">..::Requirements::..\n
 		\n
-        1. 2 bis 20 Personen\n
-        2. Diverser Alkohol\n
-        3. Anti-Alkohol\n
-        4. Ein Glas\n
+        1. Minimum of 2, maximum of 20 players\n
+        2. Various types of alcohol / Different types of spirits\n
+        3. Non-alcohlic drinks\n
+        4. A glass\n
         \n
-        ..::Spielablauf::..\n
+        ..::Gameplay::..\n
         \n
-        Jeder Mitspieler klickt der Reihe nach auf die Karten, kommt der erste Bube muss von diesem Spieler Alkohol in das Glas gefüllt werden. Der Spieler der den zweiten Buben hebt muss das Glas mit Anti-Alkohol füllen. Der Spieler mit dem dritten Buben darf das Gemisch probieren. Der glückliche mit dem letzten Buben muss austrinken.
+        Taking turns, each player must click on the cards. The first player to pickup a jack, has to pour alcohol into the glass. The player who picks up the second jack has to pour some of the non-alcoholic drink into the glass. The player who picks up the third jack has to taste the mix. The player who picks up the last jack has to chug the drink!
         \n\n
-        Viel Spaß!</string>
+        Enjoy!</string>
 
     <string name="content_description_cardView">cardView</string>
     

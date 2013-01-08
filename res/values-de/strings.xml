@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BubenHeben</string>
+    <string name="string_close_app">App beenden?</string>
+    <string name="string_do_you_really_want_to_quit">Willst du die App wirklich beenden?</string>
+    <string name="string_yes">Ja</string>
+    <string name="string_no">Nein</string>
+    <string name="string_got_it">Verstanden!</string>
+    <string name="string_done">Fertig</string>
+    <string name="string_first_boy">1. Bube</string>
+    <string name="string_second_boy">2. Bube</string>
+    <string name="string_third_boy">3. Bube</string>
+    <string name="string_fourth_boy">4. Bube</string>
+    <string name="string_fill_alkohol">Alkohol einschenken</string>
+    <string name="string_fill_anti">Anti einschenken</string>
+    <string name="string_try">Kosten</string>
+    <string name="string_drain">Austrinken</string>
+    <string name="string_reshuffle">Neu mischen?</string>
+    <string name="string_loading_cards">Lade Karten</string>
+    
+    <string name="menu_description">Erklärung</string>
+    <string name="string_description">..::Es wird benötigt::..\n
+		\n
+        1. 2 bis 20 Personen\n
+        2. Diverser Alkohol\n
+        3. Anti-Alkohol\n
+        4. Ein Glas\n
+        \n
+        ..::Spielablauf::..\n
+        \n
+        Jeder Mitspieler klickt der Reihe nach auf die Karten, kommt der erste Bube muss von diesem Spieler Alkohol in das Glas gefüllt werden. Der Spieler der den zweiten Buben hebt muss das Glas mit Anti-Alkohol füllen. Der Spieler mit dem dritten Buben darf das Gemisch probieren. Der glückliche mit dem letzten Buben muss austrinken.
+        \n\n
+        Viel Spaß!</string>
+
+    <string name="content_description_cardView">cardView</string>
+    
+</resources>
